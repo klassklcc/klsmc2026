@@ -39,24 +39,58 @@
     </div>
 
     <script>
-      function submitPassword() {
+      function hexToBytes(hex) {
+        const bytes = new Uint8Array(hex.length / 2);
+        for (let i = 0; i < hex.length; i += 2)
+          bytes[i / 2] = parseInt(hex.substr(i, 2), 16);
+        return bytes;
+      }
+
+      async function deriveKey(password) {
+        const encoder = new TextEncoder();
+        const hashBuffer = await crypto.subtle.digest(
+          "SHA-256",
+          encoder.encode(password),
+        );
+        return crypto.subtle.importKey("raw", hashBuffer, "AES-GCM", false, [
+          "decrypt",
+        ]);
+      }
+
+      async function decryptUrl(password, encryptedData) {
+        const [ivHex, tagHex, cipherHex] = encryptedData.split(":");
+        const iv = hexToBytes(ivHex);
+        const tag = hexToBytes(tagHex);
+        const ciphertext = hexToBytes(cipherHex);
+        const combined = new Uint8Array(ciphertext.length + tag.length);
+        combined.set(ciphertext);
+        combined.set(tag, ciphertext.length);
+        const key = await deriveKey(password);
+        const decrypted = await crypto.subtle.decrypt(
+          { name: "AES-GCM", iv: iv },
+          key,
+          combined,
+        );
+        return new TextDecoder().decode(decrypted);
+      }
+
+      // Encrypted redirect URLs (iv:authTag:ciphertext) — only decryptable with the correct password
+      const encryptedRedirects = [
+        "ba0a4ae8a63779e26e444b8a:c2a47ec7f2fc9bc942787df5f6f88d90:eb1a69acbe1ae57bced744",
+      ];
+
+      async function submitPassword() {
         const password = document.getElementById("password").value;
-
-        // Map passwords to their respective pages
-        /*
-          if you're reading this text. fuck off, you aren't meant to be here. cheating is for losers, and i'm a solo man team that put this together ALONE and i know it's not very good.
-          so play ball. and plau fairly.
-        */
-        const passwordRedirectMap = {
-          "Anabelle Myers": "823123.html",
-        };
-
-        if (password in passwordRedirectMap) {
-          // Redirect to the page mapped to the password
-          window.location.href = passwordRedirectMap[password];
-        } else {
-          alert("Incorrect password!");
+        for (const entry of encryptedRedirects) {
+          try {
+            const url = await decryptUrl(password, entry);
+            window.location.href = url;
+            return;
+          } catch (e) {
+            // Decryption failed — wrong password for this entry
+          }
         }
+        alert("Incorrect password!");
       }
     </script>
   </body>
