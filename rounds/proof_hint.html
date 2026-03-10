@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>KLSMC</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" href="/images/favicon.png" type="image/png" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link rel="stylesheet" href="../css/animate.css" />
+
+    <link rel="stylesheet" href="../css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="../css/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="../css/magnific-popup.css" />
+
+    <link rel="stylesheet" href="../css/flaticon.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <div id="colorlib-page">
+      <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+      <aside id="colorlib-aside" role="complementary" class="js-fullheight">
+        <h1 id="colorlib-logo" class="mb-4 mb-md-5">
+          <a href="../index.html" style="background-color: white">KLSMC</a>
+        </h1>
+        <nav id="colorlib-main-menu" role="navigation">
+          <ul>
+            <li>
+              <h3><a href="../index.html">Home</a></h3>
+            </li>
+            <li class="colorlib-active">
+              <h3><a href="../single.html">Speed Round</a></h3>
+            </li>
+            <li>
+              <h3><a href="../compdets.html">Competition Details</a></h3>
+            </li>
+            <li>
+              
+            </li>
+            <li>
+              <h3><a href="../about.html">About</a></h3>
+            </li>
+          </ul>
+          <h3 style="padding-top: 100%">
+            <a href="https://github.com/asian-mario">Made By: Rangga</a>
+          </h3>
+        </nav>
+      </aside>
+      <!-- END COLORLIB-ASIDE -->
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <title>KLSMC</title>
+          <meta charset="utf-8" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          />
+          <!-- ... other links ... -->
+          <link rel="stylesheet" href="../css/style.css" />
+        </head>
+        <body class="dark-theme">
+          <!-- ... existing content ... -->
+          <div id="colorlib-main" style="position:relative;">
+            <!-- Password Overlay -->
+            <div id="password-overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;min-height:100vh;background:rgba(20,20,20,0.97);display:flex;align-items:center;justify-content:center;z-index:9999;">
+              <div style="background:#222;padding:2.5rem 2rem;border-radius:10px;text-align:center;max-width:400px;width:90%;">
+                <h2 style="color:#fff;margin-bottom:1rem;">Enter Team Password</h2>
+                <p style="color:#aaa;font-size:0.95rem;margin-bottom:1.5rem;">Please enter your team's password to access the hints.</p>
+                <input type="password" id="team-password" placeholder="Password" autocomplete="off" style="width:100%;padding:0.7rem 1rem;border-radius:5px;border:1px solid #444;background:#1a1a1a;color:#fff;font-size:1rem;margin-bottom:1rem;" />
+                <p id="password-error" style="color:#e74c3c;display:none;margin-bottom:1rem;font-size:0.9rem;">Incorrect password. Please try again.</p>
+                <button id="password-submit" class="btn btn-primary" style="width:100%;padding:0.7rem;font-size:1rem;cursor:pointer;">Submit</button>
+              </div>
+            </div>
+            <section class="ftco-section ftco-no-pt ftco-no-pb">
+              <div class="container" style="padding-top: 20px">
+                <div class="square">
+                  <h2>Proof Hints</h2>
+                  <p>
+                      Stuck? Don't worry about it. Here are a few sets of hints which can help you! Enter your team's password to verify your usage. Be warned, usage of hints subtract the maximum amount of points by one per usage.
+                      <br><br>
+                      Good luck!
+                  </p>
+                </div>
+                <div
+                  class="four-squares"
+                  style="padding-top: 20px; padding-bottom: 2rem"
+                >
+                  <div class="square">
+                    <h2 class="colorlib-heading">Leaderboard</h2>
+                    <table id="leaderboardTable">
+                      <thead>
+                        <tr>
+                          <th>Position</th> <!-- New Position column -->
+                          <th>Team Name</th>
+                          <th>Points</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!-- Dynamic rows will be inserted here -->
+                      </tbody>
+                    </table>
+                  </div>
+                  </div>
+                </div>
+
+              </div>
+            </section>
+          </div>
+          <script>
+    // --- Password gate logic ---
+    const PASSWORD_HASHES = {
+      "fb88f9743c4d5b454ef512771b8a58a3b41fb212c777422990203dd393771610": "KLASS111",
+      "be1dd3d9d66cbd32640d41ebf5f25ff08e9c909927b748a6de20a447920bca06": "KLASS112",
+      "5779ae4f41db3a5eae183017229a3f395e0cda7788751b48efec987601e4deba": "B111",
+      "b3d9483c1777ed4ebfcb371f1d96648dfb76349d7d82041cad3e72516bbb29f2": "B112",
+      "cd614085670027a353edd89ee82aa9c1978200909518b8f6a861b47172201f9e": "E111",
+      "c180630b1a20ed9689d1ba1bdcf0cad3e59de3f7f7ecd5c4cd639422ad023880": "E112",
+      "03ec0a787e2c8f267889541addb64e6d92222abcffeab5349ce809aae8778ed0": "G111",
+      "6cb81d410a81bd1809e3c62d500d564d2e31e0aa4e5777fa5f2c21e828ba743b": "G112",
+      "9eea39cc519962bbd605a4d8674ebf6ead27cd350e2e557557cebe28f7fc1408": "H111",
+      "bc90ac9aec2010ea2f1565aaaaf165d392c64f63eb25b10bacc29dd87fcc2558": "H112",
+      "5170a124a8d5290d055dbf20eee6265806adc1a2e6f8cda51ee9732af92e0406": "ISP111",
+      "f323a9fe77f14d41786c28b9efb5a81c1b76531c57e04c4d2f67736dedadce17": "ISP112",
+      "2b166a42d6a2587a4b0ed13779e9088e653e56330a3b332009c0c2f199b964e6": "KDU111",
+      "964789cd9ed898a083a68133d5a84668d31aa8b14a8136fee23af83e76a884c6": "KDU112",
+      "2ed982c30e191c7391ca42686044cfa0c6e8ebfeeab8a490522ccd9b6f95ad36": "OASIS111",
+      "fd31c73864818788bfad85645316687d3a21e0788686e3eb3f76ca9b947dad62": "OASIS112",
+      "0707cacda274cf019246620b7689fa1c37868aeb518bef371b16ba3590829ee9": "SJP111",
+      "b2d2ddb7328719133a4021bcf8944af782d452eee3dd5041553baa6d14a03263": "SJP112",
+      "f399b779b38f764c67aeb5bc6aca78b3d31787577181ee1725d1f11a6947b863": "TAY111",
+      "de5c8a60575e8725193ce29857a0396af2554384e7ee4a5acb0bb484237e3683": "TAY112",
+      "a78c5ce744309898ad627362c2bc9d26f7a3d304493f16407ff9dadf836a50f3": "CYB111",
+      "9958aef89ef31b4e795606d88dd2fc14706066e5c68e3036d057d4f70c7ffa4b": "ELC111",
+      "08612a1c48445b5507139cc657e88b3aa956cb7305aabd584340a96f99196f59": "NEX111",
+      "b7d29d04e0e0ecd5a4e3301dd61d58f82d3a311df44d4dbb862e0433a79b057d": "SUN111",
+      "39d7352d0fa5a0cdbd62c2d566608b02c2628b80ab85674537968458fa88d9c9": "T111",
+      "2188f831a775bc99bd453f4eaf7f2ac1df16955c8339482f4be7dda92808869c": "KLASS121",
+      "78850dcad847fe0cdc0e7322ca78af592a8efeabe342ed5d3ce523a87e2b1044": "KLASS122",
+      "f7ea372d8b035ced4f1cc13c45401f24434846f9f392edeaa8ea7ebcb3613209": "AIS121",
+      "f382ff8ebb56c9b9cdbb45adf97bcdf4746937202b2d5175bc7dfd7f440e3ae5": "AIS122",
+      "ccc89a6a13188b11789988bbf9fdf19e1fcf29930e7a17b4f7ef10b06d6115b7": "E121",
+      "3a15def08273af80de0c2b422edee9bab2009739011751c39a25d0f2564a518d": "E122",
+      "1ee141cbe518696745674a9a1b45d613368b60aa92f20d4a2f7984c313f57005": "G121",
+      "fcb0f2802bf164c74b425b88328b61b1652a777595bb8b3868ece157ce641599": "G122",
+      "5b2d3e8b9375f99ab8fc6f83a76fb20de561f412c576c128406e07f147603c95": "H121",
+      "64747e2bf467c3941314e5fdfdecea1bd91d8a78bdc92e175dbc3b8e52af7a00": "H122",
+      "cbf0d58510a50526b84b99909bbdb1c1f387a5c10e431d8da0e514124520248e": "ISP121",
+      "9b33f6a5ff8d744dbe3e1a7726e57507bf7dbd5c966945184704c5abdf37f709": "ISP122",
+      "f3b0fff3295bf05541813839b8734bfda5ec0234c67956c341870d326baee1ba": "K121",
+      "52532c1b0015b13b37dd636484b94b01fbd379d522c353f36755ae76a1111b28": "K122",
+      "7c3255d96fc19396ca2ae333a39c53d8071e0f33d374e1c39477add169bef271": "NEX121",
+      "e453e112c3b96746cf4daa2a60a641c37cf8101f0360c142ded2de3a8385f5a4": "NEX122",
+      "eff8617b702a89d3154d8fda5900dc1b37662f47006b4b889be825ddd8e6a7e0": "SUN121",
+      "6d4b5af9c78855cf5ff25bcc04c699494930827d1061758ce1d7b452003a5ee8": "SJP121",
+      "c989e6aefc6b8fba2ff38edd481fd7416443ccff8774393d8e646a87f95a4cdf": "KLASS131",
+      "fda28c1bba84e54c0115afc7029499a62c3820522f392125587fde5fb9193081": "KLASS132",
+      "7a7a82e6d16f905f3b958bc2771717dba69317a998bfc4336e385732ae690e03": "B131",
+      "0d8193873437a58106f371696b6017864e66d79baec61afea530e636dde23db0": "B132",
+      "30b76e2049041586fb775148bf87ac50589ba9ecf6bab9f7094ec3e55f9a46a6": "E131",
+      "4f3b0f3c463b556a5915e995b81dbbe57375c8f1fac4d08616961bd67d4291e7": "E132",
+      "f9bf33724ba647823a9f4d90a2b1faf24cbdb8fba845e1d2c52738012c96d1ac": "G131",
+      "080ff9536526019ae49f0f051d17e1aa80fc22df5531ab05177c8bbea1d056c4": "G132",
+      "5e583c609595ace515f1a5758cac1793ee9340870e9bfb9eab8cce65162d11da": "H131",
+      "3144fc2920aa713cce70c425bab0575c32dd5c7b11f4def610b709e21cbab490": "H132",
+      "f9f826e32e80ad45bf6f32ab06d0e67caa640a147d318b1c9c55229479ef399b": "ISP131",
+      "51a9c10652327a2ff46eda007ed64e224917aab842736fd4e802933c0c863d52": "ISP132",
+      "37743e70bb6f2f3dce36913775c59ebab593bb4edafa77d47d5e6bc15e9f669c": "SUN131",
+      "b7143c1a74cc03228e8f47164e891a653212a5e5c1afc4c431a3a566f9fe7b96": "NEX131",
+      "cbbc36ef0ed4498e89bc251c2b9e72cbfd0464579c50a705295277dc32e0fe4a": "SJP131"
+    };
+
+    // Always clear Team Code on page load (refresh = re-enter password)
+    localStorage.removeItem('teamCode');
+
+    async function hashPassword(password) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(password);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function verifyPassword() {
+      const input = document.getElementById('team-password').value;
+      const errorEl = document.getElementById('password-error');
+      if (!input) { errorEl.style.display = 'block'; return; }
+      const hashed = await hashPassword(input);
+      if (PASSWORD_HASHES[hashed]) {
+        localStorage.setItem('teamCode', PASSWORD_HASHES[hashed]);
+        document.getElementById('password-overlay').style.display = 'none';
+        errorEl.style.display = 'none';
+      } else {
+        errorEl.style.display = 'block';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('password-submit').addEventListener('click', verifyPassword);
+      document.getElementById('team-password').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') verifyPassword();
+      });
+    });
+
+    // Purge Team Code when leaving the page
+    window.addEventListener('pagehide', function() {
+      localStorage.removeItem('teamCode');
+    });
+          </script>
+          <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    // Fetch data from the Google Sheets CSV
+    fetch(
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vTea1Hp5rkgRfh49dopeM58Q6F4qVSrZRQWIHmjPYYjabpf1hCtiB4_8waPVBgmMCjCbU5mn3fPb7II/pub?gid=1927463165&single=true&output=csv"
+    )
+      .then((response) => response.text())
+      .then((csv) => {
+        let lines = csv.split("\n"); // Split CSV into lines
+        console.log("CSV Preview:", lines.slice(0, 5)); // Debug the first few lines
+
+        let result = []; // This will store the leaderboard data
+
+        // Loop through rows (start from row 2 to skip the header)
+        for (let i = 1; i < lines.length; i++) {
+          let currentline = lines[i].split(",").map((cell) => cell.trim());
+
+          // Skip rows without valid data (e.g., missing Team ID or Total)
+          if (currentline.length < 4 || !currentline[0] || isNaN(Number(currentline[3]))) {
+            continue;
+          }
+
+          // Extract Team ID and Total
+          let teamID = currentline[0]; // Column A
+          let total = Number(currentline[3]); // Column D
+
+          result.push({ "Team ID": teamID, Total: total });
+        }
+
+        // Sort by Total (descending)
+        result.sort((a, b) => b.Total - a.Total);
+
+        // Limit to top 15 entries
+        let top15 = result.slice(0, 15);
+
+        // Update the leaderboard table
+        const tableBody = document
+          .getElementById("leaderboardTable")
+          .getElementsByTagName("tbody")[0];
+        tableBody.innerHTML = ""; // Clear existing table content
+
+        top15.forEach((row, index) => {
+          let tr = document.createElement("tr");
+          tr.innerHTML = `<td>${index + 1}</td><td>${row["Team ID"]}</td><td>${row.Total}</td>`;
+          tableBody.appendChild(tr);
+        });
+      })
+      .catch((error) => console.error("Error:", error));
+  });
+          </script>          
+        </body>
+      </html>
+
+      <!-- END COLORLIB-MAIN -->
+    </div>
+    <!-- END COLORLIB-PAGE -->
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen">
+      <svg class="circular" width="48px" height="48px">
+        <circle
+          class="path-bg"
+          cx="24"
+          cy="24"
+          r="22"
+          fill="none"
+          stroke-width="4"
+          stroke="#eeeeee"
+        />
+        <circle
+          class="path"
+          cx="24"
+          cy="24"
+          r="22"
+          fill="none"
+          stroke-width="4"
+          stroke-miterlimit="10"
+          stroke="#F96D00"
+        />
+      </svg>
+    </div>
+
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.easing.1.3.js"></script>
+    <script src="../js/jquery.waypoints.min.js"></script>
+    <script src="../js/jquery.stellar.min.js"></script>
+    <script src="../js/owl.carousel.min.js"></script>
+    <script src="../js/jquery.magnific-popup.min.js"></script>
+    <script src="../js/jquery.animateNumber.min.js"></script>
+    <script src="../js/scrollax.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="../js/google-map.js"></script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>
