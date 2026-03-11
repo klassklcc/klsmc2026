@@ -75,9 +75,9 @@
         </head>
         <body class="dark-theme">
           <!-- ... existing content ... -->
-          <div id="colorlib-main" style="position:relative;">
-            <!-- Password Overlay -->
-            <div id="password-overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;min-height:100vh;background:rgba(20,20,20,0.97);display:flex;align-items:center;justify-content:center;z-index:9999;">
+          <div id="colorlib-main">
+            <!-- Password Gate -->
+            <div id="password-gate" style="display:flex;align-items:center;justify-content:center;min-height:100vh;">
               <div style="background:#222;padding:2.5rem 2rem;border-radius:10px;text-align:center;max-width:400px;width:90%;">
                 <h2 style="color:#fff;margin-bottom:1rem;">Enter Team Password</h2>
                 <p style="color:#aaa;font-size:0.95rem;margin-bottom:1.5rem;">Please enter your team's password to access the hints.</p>
@@ -86,6 +86,8 @@
                 <button id="password-submit" class="btn btn-primary" style="width:100%;padding:0.7rem;font-size:1rem;cursor:pointer;">Submit</button>
               </div>
             </div>
+            <!-- Page content hidden in template until authenticated -->
+            <template id="page-content">
             <section class="ftco-section ftco-no-pt ftco-no-pb">
               <div class="container" style="padding-top: 20px">
                 <div class="square">
@@ -101,17 +103,119 @@
                   style="padding-top: 20px; padding-bottom: 2rem"
                 >
                   <div class="square">
+                    <h2>Q2: Hippity Hoppity</h2>
+                    <p>Hippity Hoppity make these points your property.</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;">
+                      <a href="https://docs.google.com/document/d/1ZNnQsS-ZLE30E0IFHHQ_f24TnSf5-MuuNULGL046XuM/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="1.1.1" data-question="Q2">1.1.1</a>
+                      <a href="https://docs.google.com/document/d/1CNYVI0-tYUzSniK86ZlS2f5vts4cupz1QTg6SWJUPUo/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="1.1.2" data-question="Q2">1.1.2</a>
+                      <a href="https://docs.google.com/document/d/1BtM0Z-gR6hlHhQgZirRkoyeCItBOx0MZ2rduMhCspF8/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="1.1.3" data-question="Q2">1.1.3</a>
+                      <a href="https://docs.google.com/document/d/1PTQlRUqzap1qTjdu9Nth1Rw6LdHAC9_nV-BlIbd_XGg/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="1.1.4" data-question="Q2">1.1.4</a>
+                      <a href="https://docs.google.com/document/d/1WQuTVLXltyjZM-5VJf6F6S-KhfQwRJaUSe7uV1dMPbg/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="1.2.1" data-question="Q2">1.2.1</a>
+                      <a href="https://docs.google.com/document/d/1AJkBoMukWjRNLq158wEc-e82hVHk2whZgulO9CsGYbQ/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="1.2.2" data-question="Q2">1.2.2</a>
+                      <a href="https://docs.google.com/document/d/1V7Dh4WF7sMsgUJsFUV7W3lLFmi7YgoOP4A_7lOvT4aM/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="1.2.3" data-question="Q2">1.2.3</a>
+                      <a href="https://docs.google.com/document/d/1i3xoKy5_EAhPs8YqgmDf0rda-8w69p6_kwMKuIxD3zU/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="1.2.4" data-question="Q2">1.2.4</a>
+                    </div>
+                  </div>
+                  <div class="square">
+                    <h2>Q3: Speedcuber</h2>
+                    <p>Probably won't solve any of these in sub-10 seconds but you could try.</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;">
+                      <a href="https://docs.google.com/document/d/1PHyW2hgGqrJ1FfBZrXLBVNUBONuyT82xgwtYabpg-w4/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="2.1.1" data-question="Q3">2.1.1</a>
+                      <a href="https://docs.google.com/document/d/1skDy68vZSCFnrXrN8Rn8-MBe-6Mt4bptlDFniaMP1Tc/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="2.2.1" data-question="Q3">2.2.1</a>
+                      <a href="https://docs.google.com/document/d/1pa6ZC98bFo0apTCh2C1gNjerqEAdMXiFdDz-xsMzcco/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="2.2.2" data-question="Q3">2.2.2</a>
+                      <a href="https://docs.google.com/document/d/1S1Y_pFITd0qO1S9-QCXbdwCbayeaCnaP3MzFceviAVs/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="2.2.3" data-question="Q3">2.2.3</a>
+                      <a href="https://docs.google.com/document/d/1QFJHp3geQmvsZu1YLOFYBerIQLh9qvM2DS5adbJG0uE/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="2.3.1" data-question="Q3">2.3.1</a>
+                      <a href="https://docs.google.com/document/d/1XnELso_57D0qSGEXQDd4CFGr42tv4tnkUrsv555CjO4/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="2.3.2" data-question="Q3">2.3.2</a>
+                      <a href="https://docs.google.com/document/d/1y_cEZEQ-htJJ3H2tx27ronrSoe9yGrZY84EjAfVMOXo/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="2.3.3" data-question="Q3">2.3.3</a>
+                    </div>
+                  </div>
+                  <div class="square">
+                    <h2>Q4: 67 Factorials</h2>
+                    <p>6-7, I just bipped right on the highway (bip, bip) <br>Skrrt, uh (bip, bip, bip)</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;">
+                      <a href="https://docs.google.com/document/d/1Usn5SyIoPe3Dfl3bw1cmCLNorRkV2f2blg-iDt5A3f8/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="3.1.1" data-question="Q4">3.1.1</a>
+                      <a href="https://docs.google.com/document/d/1eGSWTIiyRjguTlbtrgw4Z3qFBIRdCOvxysBuiZ2k8oE/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="3.2.1" data-question="Q4">3.2.1</a>
+                      <a href="https://docs.google.com/document/d/13WPbTXRUDorjLOqhZhp_qvp0OhCHBx0vSKV63rujdSc/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="3.3.1" data-question="Q4">3.3.1</a>
+                      <a href="https://docs.google.com/document/d/1jLR879z6Cat4xaE6qlNVp4yVdx_BHO7WqD0akJoaFEQ/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="3.3.2" data-question="Q4">3.3.2</a>
+                      <a href="https://docs.google.com/document/d/1s-O9s1VWBiFCDXUQxrHEsCVjZTQaUHgxGGE72IcLTeg/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="3.3.3" data-question="Q4">3.3.3</a>
+                      <a href="https://docs.google.com/document/d/128YmJ0btgy_nC9FSLKo9t_Loh4SrLFMP1R2c9SHQHWw/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="3.3.4" data-question="Q4">3.3.4</a>
+                      <a href="https://docs.google.com/document/d/1wM7BOjmEmRlNaTTCHP0HJoPtEP5EmXWkat0HFrK3R70/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="3.3.5" data-question="Q4">3.3.5</a>
+                    </div>
+                  </div>
+                  <div class="square">
+                    <h2>Q5: Searching For a Number That Doesn't Exist</h2>
+                    <p>ERROR 404: PARAGRAPH ELEMENT NOT FOUND. <br>RELOAD TO TRY AGAIN</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;">
+                      <a href="https://docs.google.com/document/d/10WnoW7nGASA3hp6EB1aW3cNZ2MY9_pK3rGuE0eoVsUI/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="4.1.1" data-question="Q5">4.1.1</a>
+                      <a href="https://docs.google.com/document/d/1XVT_tzDj0W6T5OlYJfUqztB7THstKbUKX8B5mSBVIt0/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="4.1.2" data-question="Q5">4.1.2</a>
+                      <a href="https://docs.google.com/document/d/13rvf4hqjN95ND9lQF0dS_sjWG2xTPW2EtmSjfTtfKYw/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="4.2.1" data-question="Q5">4.2.1</a>
+                      <a href="https://docs.google.com/document/d/1TU1NBBqtGDZnL3L06Qaowx3jrip876RfyB4XLwDk2HE/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="4.2.2" data-question="Q5">4.2.2</a>
+                      <a href="https://docs.google.com/document/d/1TNAfb4tNiHytNbcKR_YDE0B-90-BrwgIMTf5oTqiSXE/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="4.3.1" data-question="Q5">4.3.1</a>
+                      <a href="https://docs.google.com/document/d/1AHRkorh0RmGOXnU18zcwVbw68t9Jtv6A5gTKltKX1W8/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="4.3.2" data-question="Q5">4.3.2</a>
+                      <a href="https://docs.google.com/document/d/1deC2GgnBrRpynYZcA_n8Oxxhh6RfF6CYjVXci0MxgPk/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="4.4.1" data-question="Q5">4.4.1</a>
+                      <a href="https://docs.google.com/document/d/1qiqzzOf2C2QUcR4YJpiMS-SqpHKCg1Ylb4vaCl6YhMU/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="4.4.2" data-question="Q5">4.4.2</a>
+                      <a href="https://docs.google.com/document/d/1zbIN2ShAMsF4RfcBy0RKexMzI37V1AL3PxvqxEvSfXY/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="4.4.3" data-question="Q5">4.4.3</a>
+                    </div>
+                  </div>
+                  <div class="square">
+                    <h2>Q6: Spamming sin(x)</h2>
+                    <p>Keep doing the same thing why don't you? <br><br> Maybe it'll work out a few times.</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;">
+                      <a href="https://docs.google.com/document/d/1tPd2UyEWbv2PHh62uESDcl-KD8NusotMq9xo-TCztVY/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="5.1.1" data-question="Q6">5.1.1</a>
+                      <a href="https://docs.google.com/document/d/1KFBoUPkN8C6gNZCkIHHvEynwS6ZIj0l74bs0Rq655a8/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="5.2.1" data-question="Q6">5.2.1</a>
+                      <a href="https://docs.google.com/document/d/17RnyXC2-YndY4jiHN0I9hd_VsMdNWBigs1SutHshZFA/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="5.2.2" data-question="Q6">5.2.2</a>
+                      <a href="https://docs.google.com/document/d/1ISAxcQvXyx_ksRbnAUh3MHkfBKXWParledYHIVIHobg/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="5.3.1" data-question="Q6">5.3.1</a>
+                      <a href="https://docs.google.com/document/d/1dZHCaP_KYKafjdndmPcQc6FGlgVS4dqIhB5rJiQ5lYc/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="5.3.2" data-question="Q6">5.3.2</a>
+                      <a href="https://docs.google.com/document/d/15YwCwJwH1XcpzjbTIVzrN7olA3fv3lw3AjMJI3Xb4tQ/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="5.3.3" data-question="Q6">5.3.3</a>
+                      <a href="https://docs.google.com/document/d/1QlbnLT5pu_xESJGmh1GDJyQip_rUxxNcZaOpMXnqqWc/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="5.3.4" data-question="Q6">5.3.4</a>
+                      <a href="https://docs.google.com/document/d/1MBRth6bxDaOCJmrBSeTnwKN4Z2muLQL0MtXewBs0orE/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="5.3.5" data-question="Q6">5.3.5</a>
+                    </div>
+                  </div>
+                  <div class="square">
+                    <h2>Q7: Locating P</h2>
+                    <p>Given geometric constraints, prove the exact location of a point P within a figure using angle chasing, coordinate geometry, or classical theorems.</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;">
+                      <a href="https://docs.google.com/document/d/1eXT-wJwsN0KGRr3AXCsTCsRn8TpIjOzcPPOFBYd_PlA/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="6.1.1" data-question="Q7">6.1.1</a>
+                      <a href="https://docs.google.com/document/d/1V4RoEjjg72Gojyah8vwGPzyFwi8jmv1cPGIMmN3I6XM/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="6.2.1" data-question="Q7">6.2.1</a>
+                      <a href="https://docs.google.com/document/d/11U-58EwzrbA8oLyYF5aykgg_y_ATUMiDNpn7UgFSTjE/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="6.2.2" data-question="Q7">6.2.2</a>
+                      <a href="https://docs.google.com/document/d/19Z_G3gLc94M-fVMdaTZxIOU423XYztdTtCllhWLaBis/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="6.2.3" data-question="Q7">6.2.3</a>
+                      <a href="https://docs.google.com/document/d/1WM0Pa9aMeKS34dcidH1JsIIzvNFr6GYAhFHjUNknYg0/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="6.3.1" data-question="Q7">6.3.1</a>
+                      <a href="https://docs.google.com/document/d/1Jlx5Jv7Jl0fW8aAcbcVutT8VyPgQl0hbPUmvpGuDUBY/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="6.3.2" data-question="Q7">6.3.2</a>
+                      <a href="https://docs.google.com/document/d/16psZJzR4eS4iShCSvdtpzkIrf_zZeE1pvinI0PAF9nA/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="6.3.3" data-question="Q7">6.3.3</a>
+                      <a href="https://docs.google.com/document/d/121giVP30mbwoFfyk3hNNPpciYgiQwMN6RVnm7NAuLR0/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="6.4.1" data-question="Q7">6.4.1</a>
+                      <a href="https://docs.google.com/document/d/1KQrcxAKa3sF3Yj0NL6QhRgNy3qdqYx7HrCeYUQPmV-0/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="6.4.2" data-question="Q7">6.4.2</a>
+                      <a href="https://docs.google.com/document/d/1rP1LXk7vxCcl0y1mzjESZwcxiyNzoStd0uBpg8vzA0U/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="6.4.3" data-question="Q7">6.4.3</a>
+                    </div>
+                  </div>
+                  <div class="square">
+                    <h2>Q8: Geometric Inequalities</h2>
+                    <p>Prove an inequality relating lengths, areas, or angles in a geometric configuration. Expect to use classical inequalities alongside geometric insight.</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;">
+                      <a href="https://docs.google.com/document/d/1o_bWzYxfVzLkz4xnQ_uZZmzhVYXVtwsxtlPntKrV1UM/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="7.1.1" data-question="Q8">7.1.1</a>
+                      <a href="https://docs.google.com/document/d/1vQIN8UuDcRKZMP5Saxv9dLqSRVv1L0ZtfFVUD0fPRCU/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="7.1.2" data-question="Q8">7.1.2</a>
+                      <a href="https://docs.google.com/document/d/1-CW2KQRMlJSPdCvxWkHWVsnltnsolBakEDLZzHUtJpY/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="7.2.1" data-question="Q8">7.2.1</a>
+                      <a href="https://docs.google.com/document/d/1yvlkGv79wwaSgF1qO8GWqnc-FJ2XJlsmV6uo8V0p02w/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="7.2.2" data-question="Q8">7.2.2</a>
+                      <a href="https://docs.google.com/document/d/10qPT2Xg6JdJ9TnP30T_PDAr0743aD6r9uu40ymq8eAU/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="7.3.1" data-question="Q8">7.3.1</a>
+                      <a href="https://docs.google.com/document/d/18z21tcAndHnwLOKKy8JBjLlnF3afX9OKrwDU_We4gdg/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="7.3.2" data-question="Q8">7.3.2</a>
+                      <a href="https://docs.google.com/document/d/1t4CD0DOYeZg_kJfJ7Ml7dDZfVayKrh5ay6Vn96UChC0/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="7.4.1" data-question="Q8">7.4.1</a>
+                      <a href="https://docs.google.com/document/d/1G8qARKiXIUpqbswN7Vq6tz7aQVeWrJ4iD28_mw-fmcc/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="7.4.2" data-question="Q8">7.4.2</a>
+                      <a href="https://docs.google.com/document/d/1unNiwn0pxpyyTPZtsY916acf_vBiPSs6DVaat6ipKFo/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="7.4.3" data-question="Q8">7.4.3</a>
+                      <a href="https://docs.google.com/document/d/1OOqyjIrxwBAhe_yXPfNvIQJ9_DIK-5gt5S8hp_4q24k/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="7.5.1" data-question="Q8">7.5.1</a>
+                      <a href="https://docs.google.com/document/d/1mfv_wpu8DGHvS1MrXm1Bep3pqFC9JbxPZYZCQb1qjZU/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="7.5.2" data-question="Q8">7.5.2</a>
+                      <a href="https://docs.google.com/document/d/16uUZ2vgf37zQ_cvIWdT0B2VaI202O7VQcxLtB9sDFfU/edit?usp=sharing" class="btn btn-primary hint-btn" data-hint="7.5.3" data-question="Q8">7.5.3</a>
+                    </div>
+                  </div>
+                  <div class="square">
                     <h2 class="colorlib-heading">Leaderboard</h2>
                     <table id="leaderboardTable">
                       <thead>
                         <tr>
-                          <th>Position</th> <!-- New Position column -->
+                          <th>Position</th>
                           <th>Team Name</th>
                           <th>Points</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <!-- Dynamic rows will be inserted here -->
                       </tbody>
                     </table>
                   </div>
@@ -120,8 +224,12 @@
 
               </div>
             </section>
+            </template>
           </div>
           <script>
+    // Google Apps Script Web App URL — replace with your deployed script URL
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzca4D-IXvFT6cDeV3YuNiPCm1uFiQZ0eHe1EGucWVmavINX6j75y7C5iVIM3DXJ7om3A/exec';
+
     // --- Password gate logic ---
     const PASSWORD_HASHES = {
       "fb88f9743c4d5b454ef512771b8a58a3b41fb212c777422990203dd393771610": "KLASS111",
@@ -187,12 +295,142 @@
     // Always clear Team Code on page load (refresh = re-enter password)
     localStorage.removeItem('teamCode');
 
+    // --- Hint usage tracking (persists across sessions, per team) ---
+    function getHintStorage() {
+      try { return JSON.parse(localStorage.getItem('hintUsage')) || {}; } catch(e) { return {}; }
+    }
+    function saveHintStorage(data) {
+      localStorage.setItem('hintUsage', JSON.stringify(data));
+    }
+    function getUsedHints(teamCode) {
+      var storage = getHintStorage();
+      return storage[teamCode] || [];
+    }
+    function markHintUsed(teamCode, hintId) {
+      var storage = getHintStorage();
+      if (!storage[teamCode]) storage[teamCode] = [];
+      if (storage[teamCode].indexOf(hintId) === -1) storage[teamCode].push(hintId);
+      saveHintStorage(storage);
+    }
+    function isHintUsed(teamCode, hintId) {
+      return getUsedHints(teamCode).indexOf(hintId) !== -1;
+    }
+    // Call from dev console: resetHintStorage()
+    window.resetHintStorage = function() {
+      localStorage.removeItem('hintUsage');
+      console.log('[HINT] All stored hint usage has been reset.');
+      alert('All hint usage history has been cleared.');
+    };
+
     async function hashPassword(password) {
       const encoder = new TextEncoder();
       const data = encoder.encode(password);
       const hashBuffer = await crypto.subtle.digest('SHA-256', data);
       const hashArray = Array.from(new Uint8Array(hashBuffer));
       return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    function loadPageContent() {
+      const template = document.getElementById('page-content');
+      const main = document.getElementById('colorlib-main');
+      main.appendChild(template.content.cloneNode(true));
+      template.remove();
+      // Load leaderboard after content is in the DOM
+      fetch(
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vTea1Hp5rkgRfh49dopeM58Q6F4qVSrZRQWIHmjPYYjabpf1hCtiB4_8waPVBgmMCjCbU5mn3fPb7II/pub?gid=1927463165&single=true&output=csv"
+      )
+        .then(function(response) { return response.text(); })
+        .then(function(csv) {
+          var lines = csv.split("\n");
+          var result = [];
+          for (var i = 1; i < lines.length; i++) {
+            var currentline = lines[i].split(",").map(function(cell) { return cell.trim(); });
+            if (currentline.length < 4 || !currentline[0] || isNaN(Number(currentline[3]))) continue;
+            result.push({ teamID: currentline[0], total: Number(currentline[3]) });
+          }
+          result.sort(function(a, b) { return b.total - a.total; });
+          var top15 = result.slice(0, 15);
+          var tableBody = document.getElementById("leaderboardTable").getElementsByTagName("tbody")[0];
+          tableBody.innerHTML = "";
+          top15.forEach(function(row, index) {
+            var tr = document.createElement("tr");
+            tr.innerHTML = "<td>" + (index + 1) + "</td><td>" + row.teamID + "</td><td>" + row.total + "</td>";
+            tableBody.appendChild(tr);
+          });
+        })
+        .catch(function(error) { console.error("Error:", error); });
+
+      // Mark already-used hints and attach click handlers
+      var teamCode = localStorage.getItem('teamCode');
+      var hintBtns = document.querySelectorAll('.hint-btn');
+      hintBtns.forEach(function(btn) {
+        var hintId = btn.getAttribute('data-hint');
+
+        // If this team already used this hint, show tick immediately
+        if (teamCode && isHintUsed(teamCode, hintId)) {
+          btn.textContent = hintId + ' ✓';
+          btn.disabled = true;
+          btn.style.opacity = '0.7';
+        }
+
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          var teamCode = localStorage.getItem('teamCode');
+          if (!teamCode) { alert('No team found. Please re-enter your password.'); return; }
+          var hintId = btn.getAttribute('data-hint');
+          var question = btn.getAttribute('data-question');
+
+          // Already used — no server call, no point deduction, just open link
+          if (isHintUsed(teamCode, hintId)) {
+            console.log('[HINT] Hint', hintId, 'already used by', teamCode, '— no deduction.');
+            btn.textContent = hintId + ' ✓';
+            btn.style.opacity = '0.7';
+            window.open(btn.href, '_blank');
+            return;
+          }
+
+          var url = APPS_SCRIPT_URL + '?teamCode=' + encodeURIComponent(teamCode) + '&question=' + encodeURIComponent(question);
+          console.log('[HINT DEBUG] Clicking hint:', hintId, 'question:', question);
+          console.log('[HINT DEBUG] Team code:', teamCode);
+          console.log('[HINT DEBUG] Request URL:', url);
+          btn.disabled = true;
+          btn.textContent = hintId + ' ...';
+          fetch(url, { method: 'GET', redirect: 'follow' })
+            .then(function(response) {
+              console.log('[HINT DEBUG] Response status:', response.status);
+              console.log('[HINT DEBUG] Response ok:', response.ok);
+              return response.text();
+            })
+            .then(function(text) {
+              console.log('[HINT DEBUG] Response body:', text);
+              try {
+                var data = JSON.parse(text);
+                if (data.error) {
+                  console.error('[HINT DEBUG] Server error:', data.error);
+                  alert('Server error: ' + data.error);
+                  btn.textContent = hintId;
+                  btn.disabled = false;
+                } else {
+                  console.log('[HINT DEBUG] Success:', data);
+                  markHintUsed(teamCode, hintId);
+                  btn.textContent = hintId + ' ✓';
+                  btn.style.opacity = '0.7';
+                  window.open(btn.href, '_blank');
+                }
+              } catch(parseErr) {
+                console.error('[HINT DEBUG] Failed to parse response:', parseErr, text);
+                btn.textContent = hintId;
+                btn.disabled = false;
+              }
+            })
+            .catch(function(err) {
+              console.error('[HINT DEBUG] Fetch failed:', err);
+              btn.textContent = hintId;
+              btn.disabled = false;
+              alert('Failed to record hint usage: ' + err.message);
+            });
+        });
+      });
     }
 
     async function verifyPassword() {
@@ -202,7 +440,8 @@
       const hashed = await hashPassword(input);
       if (PASSWORD_HASHES[hashed]) {
         localStorage.setItem('teamCode', PASSWORD_HASHES[hashed]);
-        document.getElementById('password-overlay').style.display = 'none';
+        document.getElementById('password-gate').remove();
+        loadPageContent();
         errorEl.style.display = 'none';
       } else {
         errorEl.style.display = 'block';
@@ -220,56 +459,6 @@
     window.addEventListener('pagehide', function() {
       localStorage.removeItem('teamCode');
     });
-          </script>
-          <script>
-    document.addEventListener("DOMContentLoaded", function () {
-    // Fetch data from the Google Sheets CSV
-    fetch(
-      "https://docs.google.com/spreadsheets/d/e/2PACX-1vTea1Hp5rkgRfh49dopeM58Q6F4qVSrZRQWIHmjPYYjabpf1hCtiB4_8waPVBgmMCjCbU5mn3fPb7II/pub?gid=1927463165&single=true&output=csv"
-    )
-      .then((response) => response.text())
-      .then((csv) => {
-        let lines = csv.split("\n"); // Split CSV into lines
-        console.log("CSV Preview:", lines.slice(0, 5)); // Debug the first few lines
-
-        let result = []; // This will store the leaderboard data
-
-        // Loop through rows (start from row 2 to skip the header)
-        for (let i = 1; i < lines.length; i++) {
-          let currentline = lines[i].split(",").map((cell) => cell.trim());
-
-          // Skip rows without valid data (e.g., missing Team ID or Total)
-          if (currentline.length < 4 || !currentline[0] || isNaN(Number(currentline[3]))) {
-            continue;
-          }
-
-          // Extract Team ID and Total
-          let teamID = currentline[0]; // Column A
-          let total = Number(currentline[3]); // Column D
-
-          result.push({ "Team ID": teamID, Total: total });
-        }
-
-        // Sort by Total (descending)
-        result.sort((a, b) => b.Total - a.Total);
-
-        // Limit to top 15 entries
-        let top15 = result.slice(0, 15);
-
-        // Update the leaderboard table
-        const tableBody = document
-          .getElementById("leaderboardTable")
-          .getElementsByTagName("tbody")[0];
-        tableBody.innerHTML = ""; // Clear existing table content
-
-        top15.forEach((row, index) => {
-          let tr = document.createElement("tr");
-          tr.innerHTML = `<td>${index + 1}</td><td>${row["Team ID"]}</td><td>${row.Total}</td>`;
-          tableBody.appendChild(tr);
-        });
-      })
-      .catch((error) => console.error("Error:", error));
-  });
           </script>          
         </body>
       </html>
