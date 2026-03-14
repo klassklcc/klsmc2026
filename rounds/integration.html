@@ -96,7 +96,7 @@
                     <a href="https://docs.google.com/forms/d/e/1FAIpQLSfFeKPO-gzHHpt3c0a5nTaTGLXtotupf27D_0bWG_sHSwc85w/viewform?usp=dialog" target="_blank" class="btn btn-primary">Question</a>
                   </div>
                   <div class="square">
-                    <h2 class="colorlib-heading">Leaderboard</h2>
+                    <h2 class="colorlib-heading">Leaderboard (Integration Round)</h2>
                     <table id="leaderboardTable">
                       <thead>
                         <tr>
@@ -120,30 +120,83 @@
     (function() {
       var previousRanks = {};
 
+      function parseCSVLine(line) {
+        var cells = [];
+        var current = "";
+        var inQuotes = false;
+
+        for (var c = 0; c < line.length; c++) {
+          var ch = line[c];
+          if (ch === '"') {
+            if (inQuotes && line[c + 1] === '"') {
+              current += '"';
+              c++;
+            } else {
+              inQuotes = !inQuotes;
+            }
+          } else if (ch === ',' && !inQuotes) {
+            cells.push(current.trim());
+            current = "";
+          } else {
+            current += ch;
+          }
+        }
+
+        cells.push(current.trim());
+        return cells;
+      }
+
+      function toNumber(value) {
+        if (!value || value === "#N/A") {
+          return 0;
+        }
+
+        var cleanValue = String(value).replace(/,/g, "").trim();
+        var num = Number(cleanValue);
+        return isNaN(num) ? 0 : num;
+      }
+
+      function extractRowsFromCsv(csv) {
+        var lines = csv.split("\n");
+        var rows = [];
+
+        // Data starts at row 4 (index 3): Col B = team, Col C = score.
+        for (var i = 3; i < lines.length; i++) {
+          if (!lines[i] || !lines[i].trim()) continue;
+
+          var currentline = parseCSVLine(lines[i]);
+          if (currentline.length < 3) continue;
+
+          var teamName = currentline[1] ? currentline[1].trim() : "";
+          if (!teamName || teamName === "-") continue;
+
+          var score = toNumber(currentline[2]);
+          rows.push({ school: teamName, score: score });
+        }
+
+        return rows;
+      }
+
       function fetchLeaderboard() {
-        fetch(
-          "https://docs.google.com/spreadsheets/d/e/2PACX-1vRDLINcyUyIdLTF2qvhPoZX-ysy630kQx4-d98MjlIzQz-3-971Uyw2XTpcsMssgNOxpjx30lhtR7Tl/pub?gid=1385474839&single=true&output=csv"
+        var baseUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRDLINcyUyIdLTF2qvhPoZX-ysy630kQx4-d98MjlIzQz-3-971Uyw2XTpcsMssgNOxpjx30lhtR7Tl/pub?output=csv";
+        var yearSheets = ["Year 11", "Year 12", "Year 13"];
+
+        Promise.all(
+          yearSheets.map(function(sheetName) {
+            return fetch(baseUrl + "&sheet=" + encodeURIComponent(sheetName)).then(function(response) {
+              return response.text();
+            });
+          })
         )
-          .then(function(response) { return response.text(); })
-          .then(function(csv) {
-            var lines = csv.split("\n");
+          .then(function(csvList) {
             var result = [];
 
-            // Data starts at row 3 (index 2), every 2 rows is one entry
-            for (var i = 2; i < lines.length; i += 2) {
-              var currentline = lines[i].split(",").map(function(cell) { return cell.trim(); });
-              if (currentline.length < 11 || !currentline[1]) continue;
+            csvList.forEach(function(csv) {
+              result = result.concat(extractRowsFromCsv(csv));
+            });
 
-              var schoolName = currentline[1]; // Col B
-              var rankRaw = currentline[10];    // Col K
-              var rank = (!rankRaw || rankRaw === '#N/A' || rankRaw === '') ? 0 : Number(rankRaw);
-              if (isNaN(rank)) rank = 0;
-
-              result.push({ school: schoolName, rank: rank });
-            }
-
-            // Sort descending by rank
-            result.sort(function(a, b) { return b.rank - a.rank; });
+            // Sort descending by score.
+            result.sort(function(a, b) { return b.score - a.score; });
             var top15 = result.slice(0, 15);
 
             // Build new ranks map
@@ -162,7 +215,7 @@
                 else if (oldPos < pos) movement = ' <span style="color:#e74c3c;">&#9660;</span>';
               }
               var tr = document.createElement("tr");
-              tr.innerHTML = '<td>' + pos + movement + '</td><td>' + row.school + '</td><td>' + row.rank + '</td>';
+              tr.innerHTML = '<td>' + pos + movement + '</td><td>' + row.school + '</td><td>' + row.score + '</td>';
               tableBody.appendChild(tr);
             });
 
