@@ -254,7 +254,7 @@
                     </div>
                   </div>
                   <div class="square">
-                    <h2 class="colorlib-heading">Leaderboard</h2>
+                    <h2 class="colorlib-heading">Leaderboard (Proof Round)</h2>
                     <table id="leaderboardTable">
                       <thead>
                         <tr>
@@ -387,22 +387,53 @@
       var hintPreviousRanks = {};
       function fetchHintLeaderboard() {
         fetch(
-          "https://docs.google.com/spreadsheets/d/e/2PACX-1vRDLINcyUyIdLTF2qvhPoZX-ysy630kQx4-d98MjlIzQz-3-971Uyw2XTpcsMssgNOxpjx30lhtR7Tl/pub?gid=1385474839&single=true&output=csv"
+          "https://docs.google.com/spreadsheets/d/e/2PACX-1vRDLINcyUyIdLTF2qvhPoZX-ysy630kQx4-d98MjlIzQz-3-971Uyw2XTpcsMssgNOxpjx30lhtR7Tl/pub?gid=1222630441&single=true&output=csv"
         )
           .then(function(response) { return response.text(); })
           .then(function(csv) {
             var lines = csv.split("\n");
             var result = [];
-            for (var i = 2; i < lines.length; i += 2) {
-              var currentline = lines[i].split(",").map(function(cell) { return cell.trim(); });
-              if (currentline.length < 11 || !currentline[1]) continue;
-              var schoolName = currentline[1];
-              var rankRaw = currentline[10];
-              var rank = (!rankRaw || rankRaw === '#N/A' || rankRaw === '') ? 0 : Number(rankRaw);
-              if (isNaN(rank)) rank = 0;
-              result.push({ school: schoolName, rank: rank });
+
+            function parseCSVLine(line) {
+              var cells = [];
+              var current = "";
+              var inQuotes = false;
+
+              for (var c = 0; c < line.length; c++) {
+                var ch = line[c];
+                if (ch === '"') {
+                  if (inQuotes && line[c + 1] === '"') {
+                    current += '"';
+                    c++;
+                  } else {
+                    inQuotes = !inQuotes;
+                  }
+                } else if (ch === ',' && !inQuotes) {
+                  cells.push(current.trim());
+                  current = "";
+                } else {
+                  current += ch;
+                }
+              }
+
+              cells.push(current.trim());
+              return cells;
             }
-            result.sort(function(a, b) { return b.rank - a.rank; });
+
+            // Data starts at row 4 (index 3).
+            // Team is column B (index 1), score is column AC (index 28).
+            for (var i = 3; i < lines.length; i++) {
+              var currentline = parseCSVLine(lines[i]);
+              if (currentline.length < 29 || !currentline[1]) continue;
+
+              var schoolName = currentline[1];
+              var scoreRaw = currentline[28];
+              var score = (!scoreRaw || scoreRaw === '#N/A' || scoreRaw === '') ? 0 : Number(scoreRaw);
+              if (isNaN(score)) score = 0;
+              result.push({ school: schoolName, score: score });
+            }
+
+            result.sort(function(a, b) { return b.score - a.score; });
             var top15 = result.slice(0, 15);
             var newRanks = {};
             top15.forEach(function(row, index) { newRanks[row.school] = index + 1; });
@@ -417,7 +448,7 @@
                 else if (oldPos < pos) movement = ' <span style="color:#e74c3c;">&#9660;</span>';
               }
               var tr = document.createElement("tr");
-              tr.innerHTML = '<td>' + pos + movement + '</td><td>' + row.school + '</td><td>' + row.rank + '</td>';
+              tr.innerHTML = '<td>' + pos + movement + '</td><td>' + row.school + '</td><td>' + row.score + '</td>';
               tableBody.appendChild(tr);
             });
             hintPreviousRanks = newRanks;
@@ -435,7 +466,7 @@
 
         // If this team already used this hint, show tick immediately
         if (teamCode && isHintUsed(teamCode, hintId)) {
-          btn.textContent = hintId + ' âœ“';
+          btn.textContent = hintId + ' \u2713';
           btn.disabled = true;
           btn.style.opacity = '0.7';
         }
@@ -450,7 +481,7 @@
           // Already used â€” no server call, no point deduction, just open link
           if (isHintUsed(teamCode, hintId)) {
             console.log('[HINT] Hint', hintId, 'already used by', teamCode, 'â€” no deduction.');
-            btn.textContent = hintId + ' âœ“';
+            btn.textContent = hintId + ' \u2713';
             btn.style.opacity = '0.7';
             window.open(btn.href, '_blank');
             return;
@@ -480,7 +511,7 @@
                 } else {
                   console.log('[HINT DEBUG] Success:', data);
                   markHintUsed(teamCode, hintId);
-                  btn.textContent = hintId + ' âœ“';
+                  btn.textContent = hintId + ' \u2713';
                   btn.style.opacity = '0.7';
                   window.open(btn.href, '_blank');
                 }

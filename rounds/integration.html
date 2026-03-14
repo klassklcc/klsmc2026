@@ -160,7 +160,8 @@
         var lines = csv.split("\n");
         var rows = [];
 
-        // Data starts at row 4 (index 3): Col B = team, Col C = score.
+        // Data starts at row 4 (index 3).
+        // Col A (index 0) = blank, Col B (index 1) = Team Code, Col C (index 2) = Integration Round points.
         for (var i = 3; i < lines.length; i++) {
           if (!lines[i] || !lines[i].trim()) continue;
 
@@ -171,7 +172,7 @@
           if (!teamName || teamName === "-") continue;
 
           var score = toNumber(currentline[2]);
-          rows.push({ school: teamName, score: score });
+          rows.push({ team: teamName, score: score });
         }
 
         return rows;
@@ -201,7 +202,7 @@
 
             // Build new ranks map
             var newRanks = {};
-            top15.forEach(function(row, index) { newRanks[row.school] = index + 1; });
+            top15.forEach(function(row, index) { newRanks[row.team] = index + 1; });
 
             var tableBody = document.getElementById("leaderboardTable").getElementsByTagName("tbody")[0];
             tableBody.innerHTML = "";
@@ -209,13 +210,13 @@
             top15.forEach(function(row, index) {
               var pos = index + 1;
               var movement = '';
-              if (previousRanks[row.school] !== undefined) {
-                var oldPos = previousRanks[row.school];
+              if (previousRanks[row.team] !== undefined) {
+                var oldPos = previousRanks[row.team];
                 if (oldPos > pos) movement = ' <span style="color:#2ecc71;">&#9650;</span>';
                 else if (oldPos < pos) movement = ' <span style="color:#e74c3c;">&#9660;</span>';
               }
               var tr = document.createElement("tr");
-              tr.innerHTML = '<td>' + pos + movement + '</td><td>' + row.school + '</td><td>' + row.score + '</td>';
+              tr.innerHTML = '<td>' + pos + movement + '</td><td>' + row.team + '</td><td>' + row.score + '</td>';
               tableBody.appendChild(tr);
             });
 
