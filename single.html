@@ -198,19 +198,36 @@
           <script>
             document.addEventListener("DOMContentLoaded", function () {
                 const unlockTimes = {
-                    "proof": new Date("2026-03-09T10:30:00+08:00"),
-                    "integration": new Date("2026-03-09T10:00:00+08:00")
+                "proof": new Date("2026-03-14T14:30:00+08:00"),
+                "integration": new Date("2026-03-14T16:00:00+08:00")
                 };
 
                 function updateButtons() {
                     const now = new Date();
 
-                    document.querySelectorAll("a.btn-disabled[data-round]").forEach(button => {
+                document.querySelectorAll("a[data-round]").forEach(button => {
                         const round = button.getAttribute("data-round");
+                  const unlockTime = unlockTimes[round];
 
-                        if (unlockTimes[round] && now >= unlockTimes[round]) {
+                  if (!button.dataset.originalHref) {
+                    button.dataset.originalHref = button.getAttribute("href") || "";
+                  }
+
+                  if (unlockTime && now < unlockTime) {
+                    button.classList.add("btn-disabled");
+                    button.classList.remove("btn-primary");
+                    button.setAttribute("aria-disabled", "true");
+                    button.removeAttribute("href");
+                    return;
+                  }
+
+                  if (unlockTime && now >= unlockTime) {
                             button.classList.remove("btn-disabled");
                             button.classList.add("btn-primary");
+                    button.removeAttribute("aria-disabled");
+                    if (button.dataset.originalHref) {
+                      button.setAttribute("href", button.dataset.originalHref);
+                    }
                         }
                     });
                 }
